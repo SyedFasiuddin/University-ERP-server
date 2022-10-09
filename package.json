@@ -1,0 +1,11 @@
+{
+  "name": "mysql-rest-university-management",
+  "version": "0.1.0",
+  "description": "REST API in nodejs, for university mangement system with MySQL database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Syed Fasiuddin",
+  "license": "MIT"
+}
