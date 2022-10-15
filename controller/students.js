@@ -1,40 +1,37 @@
 const db = require("../db")
 
-const getAllStudents = async (req, res) => {
+const getAllStudents = async (_req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM students")
-        res.send({ ...queryRes.rows })
+        res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
 const getStudentById = async (req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM students WHERE usn = $1", [req.params.id])
-        if (queryRes.rows.length > 0 )
-            res.send({ ...queryRes.rows })
+        if (queryRes.rows.length > 0)
+            res.status(200).send({ ...queryRes.rows })
         else
-            res.send({
+            res.status(400).send({
                 "message": "Cannot find student with id " + req.params.id
             })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
 const deleteStudentById = async (req, res) => {
     try {
         const queryRes = await db.query("DELETE FROM students WHERE usn = $1", [req.params.id])
-        res.send({ ...queryRes.rows })
+        res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
@@ -87,11 +84,55 @@ const addStudent = async (req, res) => {
 
     try {
         const queryRes = await db.query(query)
-        res.send({ queryRes })
+        res.status(200).send({ queryRes })
     } catch (e) {
         console.error(e.stack)
-        res.status(400)
-        res.send(e)
+        res.status(500).end()
+    }
+}
+
+const getStudentLeaveById = async (req, res) => {
+    try {
+        const queryRes = await db.query("SELECT * FROM student_leave WHERE usn = $1", [req.params.id])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.error(e.stack)
+        res.status(500).end()
+    }
+}
+
+const addStudentLeaveById = async (req, res) => {
+    try {
+        // get department ud from student id and make assigned default to false
+        const queryRes = await db.query("INSERT INTO students_leave(usn, date) VALUES($1, $2) RETURNING *",
+            [req.params.id, req.body.date])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.error(e.stack)
+        res.status(500).end()
+    }
+}
+
+const getStudentAttendanceById = async (req, res) => {
+    try {
+        const queryRes = await db.query("SELECT * FROM student_attendance WHERE usn = $1",
+            [req.params.id])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e.stack)
+        res.status(500).end()
+    }
+}
+
+const addStudentAttendanceById = async (req, res) => {
+    try {
+        const queryRes = await db.query(`INSERT INTO student_attendance(usn, absent_date)
+            VALUES($1, $2) RETURNING *`,
+            [req.params.id, req.body.absent_date])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e.stack)
+        res.status(500).end()
     }
 }
 
@@ -100,5 +141,9 @@ module.exports = {
     getStudentById,
     deleteStudentById,
     addStudent,
+    getStudentLeaveById,
+    addStudentLeaveById,
+    getStudentAttendanceById,
+    addStudentAttendanceById,
 }
 

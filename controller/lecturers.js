@@ -1,13 +1,12 @@
 const db = require("../db")
 
-const getAllLecturers = async (req, res) => {
+const getAllLecturers = async (_req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM lecturers")
-        res.send({ ...queryRes.rows })
+        res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
@@ -15,26 +14,24 @@ const getLecturerById = async (req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM lecturers WHERE lecturer_id = $1", [req.params.id])
         if (queryRes.rows.length > 0 )
-            res.send({ ...queryRes.rows })
+            res.status(200).send({ ...queryRes.rows })
         else
-            res.send({
+            res.status(400).send({
                 "message": "Cannot find lecturer with id " + req.params.id
             })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
 const deleteLecturerById = async (req, res) => {
     try {
         const queryRes = await db.query("DELETE FROM lecturers WHERE lecturer_id = $1", [req.params.id])
-        res.send({ ...queryRes.rows })
+        res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
-        res.statusCode(500)
-        res.send({ "message": "something went wrong" })
+        res.status(500).end()
     }
 }
 
@@ -91,11 +88,56 @@ const addLecturer = async (req, res) => {
 
     try {
         const queryRes = await db.query(query)
-        res.send({ ...queryRes.rows })
+        res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
-        res.status(400)
-        res.send(e.details)
+        res.status(500).end()
+    }
+}
+
+const getLecturerLeaveById = async (req, res) => {
+    try {
+        const queryRes = await db.query("SELECT * FROM lecturer_leave WHERE lecturer_id = $1", [req.params.id])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.error(e.stack)
+        res.status(500).end()
+    }
+}
+
+const addLecturerLeaveById = async (req, res) => {
+    try {
+        // get department id from lecturer_id and make assigned default to false
+        const queryRes = await db.query(`INSERT INTO lecturer_leave (lecturer_id, date)
+            VALUES($1, $2) RETURNING *`,
+            [req.params.id, req.body.date])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.error(e.stack)
+        res.status(500).end()
+    }
+}
+
+const getLecturerAttendanceById = async (req, res) => {
+    try {
+        const queryRes = await db.query("SELECT * FROM lecturer_attendance WHERE lecturer_id = $1",
+            [req.params.id])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e.stack)
+        res.status(500).end()
+    }
+}
+
+const addLecturerAttendanceById = async (req, res) => {
+    try {
+        const queryRes = await db.query(`INSERT INTO lecturer_attendance(lecturer_id, absent_date)
+            VALUES($1, $2) RETURNING *`,
+            [req.params.id, req.body.absent_date])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e.stack)
+        res.status(500).end()
     }
 }
 
@@ -104,5 +146,9 @@ module.exports = {
     getLecturerById,
     deleteLecturerById,
     addLecturer,
+    getLecturerLeaveById,
+    addLecturerLeaveById,
+    getLecturerAttendanceById,
+    addLecturerAttendanceById,
 }
 
