@@ -103,12 +103,13 @@ const getStudentLeaveById = async (req, res) => {
 
 const addStudentLeaveById = async (req, res) => {
     try {
-        // get department ud from student id and make assigned default to false
-        const queryRes = await db.query("INSERT INTO students_leave(usn, date) VALUES($1, $2) RETURNING *",
-            [req.params.id, req.body.date])
+        const departmentId = await db.query("SELECT department FROM students WHERE usn = $1", [req.params.id])
+        const queryRes = await db.query(`INSERT INTO student_leave(department, usn, date)
+            VALUES($1, $2, $3) RETURNING *`,
+            [departmentId.rows[0].department, req.params.id, req.body.date])
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
-        console.error(e.stack)
+        console.error(e)
         res.status(500).end()
     }
 }
@@ -131,8 +132,10 @@ const addStudentAttendanceById = async (req, res) => {
             [req.params.id, req.body.absent_date])
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
-        console.log(e.stack)
-        res.status(500).end()
+        console.log(e)
+        if (parseInt(e.code) === 23505)
+            res.status(400).send({ "error": "Already exists" })
+        else res.status(400).end()
     }
 }
 
