@@ -135,7 +135,7 @@ const addStudentAttendanceById = async (req, res) => {
         console.log(e)
         if (parseInt(e.code) === 23505)
             res.status(400).send({ "error": "Already exists" })
-        else res.status(400).end()
+        else res.status(500).end()
     }
 }
 

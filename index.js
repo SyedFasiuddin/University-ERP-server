@@ -1,6 +1,8 @@
 const express = require("express")
 const studentsRoute = require("./routes/students")
 const lecturersRoute = require("./routes/lecturers")
+const subjectsRoute = require("./routes/subjects")
+const departmentsRoute = require("./routes/departments")
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -19,4 +21,6 @@ app.listen(process.env.PORT || 8000, () => {
 
 app.use("/students", studentsRoute)
 app.use("/lecturers", lecturersRoute)
+app.use("/subjects", subjectsRoute)
+app.use("/departments", departmentsRoute)
 
