@@ -1,6 +1,7 @@
 CREATE DATABASE erp;
+\c erp  -- PostgeSQL
 
-CREATE TABLE department(
+CREATE TABLE departments(
     full_name           VARCHAR(100),
     short_code          VARCHAR(5),
     PRIMARY KEY (short_code)
@@ -26,7 +27,7 @@ CREATE TABLE students(
     aadhar_number       NUMERIC(12, 0),
     bank_account_number NUMERIC(12, 0),
     PRIMARY KEY (usn),
-    FOREIGN KEY (department) REFERENCES department(short_code)
+    FOREIGN KEY (department) REFERENCES departments(short_code)
 );
 
 CREATE TABLE lecturers(
@@ -51,8 +52,11 @@ CREATE TABLE lecturers(
     deduction           INT,
     net_salary          INT,
     PRIMARY KEY (lecturer_id),
-    FOREIGN KEY (department) REFERENCES department(short_code)
+    FOREIGN KEY (department) REFERENCES departments(short_code)
 );
+
+ALTER TABLE departments ADD COLUMN hod_lecturer_id VARCHAR(15)
+REFERENCES lecturers(lecturer_id);
 
 CREATE TABLE student_leave(
     department          varchar(5),
@@ -61,7 +65,7 @@ CREATE TABLE student_leave(
     assigned            boolean DEFAULT false,
     PRIMARY KEY (usn, date),
     FOREIGN KEY (usn) REFERENCES students(usn),
-    FOREIGN KEY (department) REFERENCES department(short_code)
+    FOREIGN KEY (department) REFERENCES departments(short_code)
 );
 
 CREATE TABLE lecturer_leave(
@@ -71,7 +75,7 @@ CREATE TABLE lecturer_leave(
     assigned            boolean DEFAULT false,
     PRIMARY KEY (lecturer_id, date),
     FOREIGN KEY (lecturer_id) REFERENCES lecturers(lecturer_id),
-    FOREIGN KEY (department) REFERENCES department(short_code)
+    FOREIGN KEY (department) REFERENCES departments(short_code)
 );
 
 CREATE TABLE student_attendance(
@@ -93,21 +97,32 @@ CREATE TABLE subjects(
     subject_name        VARCHAR(50),
     taught_by           VARCHAR(15),
     department          VARCHAR(5),
+    semester            NUMERIC(1,0),
     PRIMARY KEY (subject_code),
     FOREIGN KEY (taught_by) REFERENCES lecturers(lecturer_id),
-    FOREIGN KEY (department) REFERENCES department(short_code)
+    FOREIGN KEY (department) REFERENCES departments(short_code)
 );
 
-CREATE TABLE students_subject_marks(
+CREATE TABLE students_subjects_marks(
     usn                 VARCHAR(15),
     subject_code        VARCHAR(10),
-    "IA1"               NUMERIC(2,0) DEFAULT 0,
-    "IA2"               NUMERIC(2,0) DEFAULT 0,
-    "IA3"               NUMERIC(2,0) DEFAULT 0,
-    external            NUMERIC(3,0) DEFAULT 0,
-    "IA_average"        NUMERIC(3,1) DEFAULT 0,
+    -- -1 means marks not yet assigned
+    -- -2 means student was absent
+    "IA1"               NUMERIC(2,0) DEFAULT -1,
+    "IA2"               NUMERIC(2,0) DEFAULT -1,
+    "IA3"               NUMERIC(2,0) DEFAULT -1,
+    external            NUMERIC(3,0) DEFAULT -1,
+    "IA_average"        NUMERIC(3,1) DEFAULT -1,
     pass                boolean DEFAULT false,
     PRIMARY KEY (usn, subject_code),
     FOREIGN KEY (usn) REFERENCES students(usn)
+);
+
+CREATE TABLE students_subjects(
+    usn                 VARCHAR(15),
+    subject_code        VARCHAR(10),
+    PRIMARY KEY (usn, subject_code),
+    FOREIGN KEY (usn) REFERENCES students(usn),
+    FOREIGN KEY (subject_code) REFERENCES subjects(subject_code)
 );
 
