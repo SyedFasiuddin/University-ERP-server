@@ -139,6 +139,17 @@ const addStudentAttendanceById = async (req, res) => {
     }
 }
 
+const getStudentMarksForAllSubjects = async (req, res) => {
+    try {
+        const queryRes = await db.query(`SELECT * FROM students_subject_marks
+            WHERE usn = $1`, [req.params.id])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
 module.exports = {
     getAllStudents,
     getStudentById,
@@ -148,5 +159,6 @@ module.exports = {
     addStudentLeaveById,
     getStudentAttendanceById,
     addStudentAttendanceById,
+    getStudentMarksForAllSubjects,
 }
 

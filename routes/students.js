@@ -6,7 +6,8 @@ const {
     getStudentLeaveById,
     addStudentLeaveById,
     getStudentAttendanceById,
-    addStudentAttendanceById
+    addStudentAttendanceById,
+    getStudentMarksForAllSubjects
 } = require("../controller/students")
 const { Router } = require("express")
 
@@ -23,6 +24,8 @@ router.post("/:id/leave", addStudentLeaveById)
 
 router.get("/:id/attendance", getStudentAttendanceById)
 router.post("/:id/attendance", addStudentAttendanceById)
+
+router.get("/:id/marks", getStudentMarksForAllSubjects)
 
 router.put("/:id", (req, res) => {
     res.send({
