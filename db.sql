@@ -115,14 +115,15 @@ CREATE TABLE students_subjects_marks(
     "IA_average"        NUMERIC(3,1) DEFAULT -1,
     pass                boolean DEFAULT false,
     PRIMARY KEY (usn, subject_code),
-    FOREIGN KEY (usn) REFERENCES students(usn)
-);
-
-CREATE TABLE students_subjects(
-    usn                 VARCHAR(15),
-    subject_code        VARCHAR(10),
-    PRIMARY KEY (usn, subject_code),
     FOREIGN KEY (usn) REFERENCES students(usn),
     FOREIGN KEY (subject_code) REFERENCES subjects(subject_code)
 );
+
+-- CREATE TABLE students_subjects(
+--     usn                 VARCHAR(15),
+--     subject_code        VARCHAR(10),
+--     PRIMARY KEY (usn, subject_code),
+--     FOREIGN KEY (usn) REFERENCES students(usn),
+--     FOREIGN KEY (subject_code) REFERENCES subjects(subject_code)
+-- );
 
