@@ -141,8 +141,14 @@ const addStudentAttendanceById = async (req, res) => {
 
 const getStudentMarksForAllSubjects = async (req, res) => {
     try {
-        const queryRes = await db.query(`SELECT * FROM students_subject_marks
-            WHERE usn = $1`, [req.params.id])
+        const queryRes = await db.query(`
+                SELECT s.usn, s.name, m.subject_code, m."IA1", m."IA2", m."IA3",
+                       m."IA_average", m.external
+                  FROM students_subject_marks AS m
+             LEFT JOIN students as s
+                 USING (usn)
+                 WHERE usn = $1`,
+            [req.params.id])
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.log(e)

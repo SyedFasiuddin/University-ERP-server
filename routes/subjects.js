@@ -8,6 +8,7 @@ const {
     addSubjectMarksPerStudentForIA3,
     addSubjectMarksPerSubjectForExternal,
     getSubjectMarksForStudentById,
+    getSubjectMarksForAllStudents,
 } = require("../controller/subjects");
 
 const router = new Router()
@@ -23,6 +24,7 @@ router.post("/:subject_code/IA3", addSubjectMarksPerStudentForIA3)
 router.post("/:subject_code/external", addSubjectMarksPerSubjectForExternal)
 
 router.get("/:subject_code/:id", getSubjectMarksForStudentById)
+router.get("/:subject_code/all", getSubjectMarksForAllStudents)
 
 module.exports = router
 

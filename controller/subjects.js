@@ -104,6 +104,22 @@ const getSubjectMarksForStudentById = async (req, res) => {
     res.status(200).send({ ...queryRes.rows })
 }
 
+const getSubjectMarksForAllStudents = async (req, res) => {
+    try {
+        const queryRes = await db.query(`
+                SELECT m.usn, s.name, m."IA_average", m.external
+                  FROM students_subjects_marks AS m
+             LEFT JOIN students AS s
+                 USING (usn)
+                 WHERE subject_code = $1`,
+            [req.params.subject_code])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
 module.exports = {
     getAllSubjects,
     getSubjectsByDepartment,
@@ -113,5 +129,6 @@ module.exports = {
     addSubjectMarksPerStudentForIA3,
     addSubjectMarksPerSubjectForExternal,
     getSubjectMarksForStudentById,
+    getSubjectMarksForAllStudents,
 }
 
