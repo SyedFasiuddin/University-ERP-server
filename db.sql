@@ -81,7 +81,6 @@ CREATE TABLE lecturer_leave(
 CREATE TABLE student_attendance(
     usn                 VARCHAR(15),
     absent_date         DATE,
-    PRIMARY KEY (usn, absent_date),
     FOREIGN KEY (usn) REFERENCES students(usn)
 );
 
@@ -102,6 +101,11 @@ CREATE TABLE subjects(
     FOREIGN KEY (taught_by) REFERENCES lecturers(lecturer_id),
     FOREIGN KEY (department) REFERENCES departments(short_code)
 );
+
+ALTER TABLE student_attendance ADD COLUMN subject_code VARCHAR(10)
+REFERENCES subjects(subject_code);
+
+ALTER TABLE student_attendance ADD PRIMARY KEY (usn, absent_date, subject_code);
 
 CREATE TABLE students_subjects_marks(
     usn                 VARCHAR(15),

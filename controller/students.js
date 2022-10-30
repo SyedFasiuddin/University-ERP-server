@@ -1,4 +1,5 @@
 const db = require("../db")
+const bcrypt = require("bcrypt")
 
 const getAllStudents = async (_req, res) => {
     try {
@@ -36,6 +37,8 @@ const deleteStudentById = async (req, res) => {
 }
 
 const addStudent = async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+
     const query = {
         text: `INSERT INTO students (
                     usn,
@@ -60,6 +63,9 @@ const addStudent = async (req, res) => {
                   $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18
                 )
                  RETURNING *`,
+        // it is expected from the client that all of this information is present
+        // in the request body, if this is not present then null will be added
+        // in tables.
         values: [
             req.body.usn,
             req.body.name,
@@ -83,11 +89,13 @@ const addStudent = async (req, res) => {
     }
 
     try {
-        const queryRes = await db.query(query)
-        res.status(200).send({ queryRes })
+        // await db.query(query)
+        await db.query("INSERT INTO passwords (id, password) VALUES ( $1, $2 )",
+            [req.body.id, hashedPassword])
+        res.status(200).send({ "message": "done" })
     } catch (e) {
-        console.error(e.stack)
-        res.status(500).end()
+        console.error(e)
+        res.status(500).send({ "error": e.detail }) // 23505 error no.
     }
 }
 
@@ -127,9 +135,11 @@ const getStudentAttendanceById = async (req, res) => {
 
 const addStudentAttendanceById = async (req, res) => {
     try {
-        const queryRes = await db.query(`INSERT INTO student_attendance(usn, absent_date)
-            VALUES($1, $2) RETURNING *`,
-            [req.params.id, req.body.absent_date])
+        const queryRes = await db.query(`
+            INSERT INTO student_attendance(usn, absent_date, subject_code)
+                 VALUES ($1, $2, $3)
+              RETURNING *`,
+            [req.params.id, req.body.absent_date, req.params.subject_code])
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.log(e)
