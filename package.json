@@ -1,7 +1,7 @@
 {
-  "name": "mysql-rest-university-management",
+  "name": "university-erp-server",
   "version": "0.1.0",
-  "description": "REST API in nodejs, for university mangement system with MySQL database",
+  "description": "Server (API) for the database project named \"kbn.edu: The ERP solution\"",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -9,8 +9,10 @@
   "author": "Syed Fasiuddin",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0"
   },
   "devDependencies": {

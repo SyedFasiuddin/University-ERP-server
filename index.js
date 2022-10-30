@@ -3,6 +3,7 @@ const studentsRoute = require("./routes/students")
 const lecturersRoute = require("./routes/lecturers")
 const subjectsRoute = require("./routes/subjects")
 const departmentsRoute = require("./routes/departments")
+const loginRoute = require("./routes/login")
 const dotenv = require("dotenv")
 dotenv.config()
 
@@ -23,4 +24,5 @@ app.use("/students", studentsRoute)
 app.use("/lecturers", lecturersRoute)
 app.use("/subjects", subjectsRoute)
 app.use("/departments", departmentsRoute)
+app.use("/login", loginRoute)
 

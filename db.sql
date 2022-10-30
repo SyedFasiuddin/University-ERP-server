@@ -127,3 +127,9 @@ CREATE TABLE students_subjects_marks(
 --     FOREIGN KEY (subject_code) REFERENCES subjects(subject_code)
 -- );
 
+CREATE TABLE passwords(
+    id                  VARCHAR(15),
+    password            VARCHAR(255),
+    PRIMARY KEY (id)
+);
+
