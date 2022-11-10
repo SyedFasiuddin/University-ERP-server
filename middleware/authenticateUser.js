@@ -3,7 +3,7 @@ const db = require("../db")
 
 const authenticateUser = async (req, res, next) => {
     const authHeader = req.headers.authorization
-    if (authHeader) {
+    if (!authHeader) {
         res.status(403).end()
         return
     }
