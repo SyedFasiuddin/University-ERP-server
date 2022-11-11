@@ -118,11 +118,11 @@ const addSubjectMarksPerSubjectForExternal = async (req, res) => {
             const IA3 = parseInt(iaMarks.rows[0].IA3)
             const IA_average = Math.round((IA1 + IA2 + IA3 - Math.min(IA1, IA2, IA3)) / 2)
 
-            await db.query(`UPDATE students_subjects_marks SET "IA_average" = $1`,
+            await db.query("UPDATE students_subjects_marks SET \"IA_average\" = $1",
                 [IA_average])
 
             if (IA_average + req.body[key] > 35)
-                await db.query(`UPDATE students_subjects_marks SET pass = true`)
+                await db.query("UPDATE students_subjects_marks SET pass = true")
 
         }
         res.status(200).end()

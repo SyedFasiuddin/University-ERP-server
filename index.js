@@ -7,8 +7,8 @@ const loginRoute = require("./routes/login")
 const dotenv = require("dotenv")
 dotenv.config()
 
-const app = express();
-app.use(express.json());
+const app = express()
+app.use(express.json())
 
 app.get("/", (_, res) => {
     res.send({

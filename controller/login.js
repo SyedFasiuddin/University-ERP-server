@@ -6,7 +6,7 @@ const login = async (req, res) => {
     try {
         const { id, password } = req.body
         if (!id || !password) {
-            res.send(400).send({ "message": "id or password missing" })
+            res.status(400).send({ "message": "id or password missing" })
             return
         }
 
@@ -16,7 +16,7 @@ const login = async (req, res) => {
              WHERE id = $1`, [id])
 
         if (queryRes.rows.length < 1) {
-            res.status(400).send({ "error": "user does not exists" })
+            res.status(400).send({ "message": "user does not exists" })
             return
         }
 
@@ -26,7 +26,7 @@ const login = async (req, res) => {
             return
         }
 
-        res.status(400).send({ "error": "wrong password" })
+        res.status(400).send({ "message": "wrong password" })
     } catch (e) {
         console.log(e)
         res.status(500).end()

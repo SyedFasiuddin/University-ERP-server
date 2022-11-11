@@ -8,7 +8,7 @@ const authenticateUser = async (req, res, next) => {
         return
     }
 
-    const token = authHeader.split(' ')[1]
+    const token = authHeader.split(" ")[1]
     const id = jwt.verify(token, process.env.JWT_SECRET)
 
     if (id == req.params.id) next()
@@ -25,7 +25,7 @@ const authSubjectLecturer = async (req, res, next) => {
         return
     }
 
-    const token = authHeader.split(' ')[1]
+    const token = authHeader.split(" ")[1]
     const id = jwt.verify(token, process.env.JWT_SECRET)
 
     const queryRes = db.query(`SELECT taught_by FROM subjects

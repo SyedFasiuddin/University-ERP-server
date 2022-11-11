@@ -1,4 +1,4 @@
-const { Router } = require("express");
+const { Router } = require("express")
 const {
     getAllSubjects,
     getSubjectsByDepartment,
@@ -9,8 +9,8 @@ const {
     addSubjectMarksPerSubjectForExternal,
     getSubjectMarksForStudentById,
     getSubjectMarksForAllStudents,
-} = require("../controller/subjects");
-const { authSubjectLecturer } = require("../middleware/authenticateUser");
+} = require("../controller/subjects")
+const { authSubjectLecturer } = require("../middleware/authenticateUser")
 
 const router = new Router()
 

@@ -4,7 +4,8 @@
   "description": "Server (API) for the database project named \"kbn.edu: The ERP solution\"",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "format": "eslint --fix ."
   },
   "author": "Syed Fasiuddin",
   "license": "MIT",
@@ -16,6 +17,8 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "eslint": "^8.27.0",
     "nodemon": "^2.0.20"
   }
 }
