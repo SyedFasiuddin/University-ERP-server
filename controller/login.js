@@ -33,7 +33,37 @@ const login = async (req, res) => {
     }
 }
 
+const whoIs = async (req, res) => {
+    try {
+        const { id } = req.body
+        if (!id) {
+            res.status(400).send({ "message": "no id available" })
+            return
+        }
+
+        const queryRes = await db.query(`
+            SELECT lecturer_id
+              FROM lecturers
+             WHERE lecturer_id = $1`, [id])
+
+        if (queryRes.rows.length == 1)
+            res.status(200).send({
+                "lecturer": true,
+                "student": false
+            })
+        else
+            res.status(200).send({
+                "lecturer": false,
+                "student": true
+            })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
 module.exports = {
     login,
+    whoIs,
 }
 
