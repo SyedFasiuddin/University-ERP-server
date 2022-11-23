@@ -2,6 +2,31 @@ const db = require("../db")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
+const checkPasswordConstraints = (pass) => {
+    if (pass.length < 12)
+        throw new Error("Password length is less than 12 characters")
+
+    if (pass.length > 40)
+        throw new Error("Password length is more than 40 characters")
+
+    const characters = pass.split('')
+
+    let capitalLetters = 0
+    let smallLetters = 0
+    let numbers = 0
+    let symbols = 0
+
+    for (let char of characters) {
+        if ( char >= 'a' && char <= 'z' ) smallLetters++
+        else if ( char >= 'A' && char <= 'Z' ) capitalLetters++
+        else if ( char >= '0' && char <= '9' ) numbers++
+        else symbols++
+    }
+
+    if (capitalLetters > 0 && numbers > 3 && symbols > 0) return true
+    else return false
+}
+
 const login = async (req, res) => {
     try {
         const { id, password } = req.body
