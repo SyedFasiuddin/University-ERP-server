@@ -45,9 +45,16 @@ const login = async (req, res) => {
             return
         }
 
+        const lecRes = await db.query(`
+            SELECT lecturer_id FROM lecturers WHERE lecturer_id = $1;
+            `, [id])
+
         if (await bcrypt.compare(password, queryRes.rows[0].password)) {
             const token = jwt.sign(id, process.env.JWT_SECRET)
-            res.status(200).send({ token })
+            if (lecRes.rows.length < 1)
+                res.status(200).send({ token, "lecturer": false })
+            else
+                res.status(200).send({ token, "lecturer": true })
             return
         }
 
