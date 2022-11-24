@@ -2,8 +2,8 @@ CREATE DATABASE erp;
 \c erp  -- PostgeSQL
 
 CREATE TABLE departments(
-    full_name           VARCHAR(100),
-    short_code          VARCHAR(5),
+    full_name           VARCHAR(100) NOT NULL,
+    short_code          VARCHAR(5) NOT NULL,
     PRIMARY KEY (short_code)
 );
 
@@ -16,7 +16,7 @@ CREATE TABLE students(
     address             VARCHAR(255),
     phone_num           NUMERIC(10, 0),
     email               VARCHAR(30),
-    department          VARCHAR(5),
+    department          VARCHAR(5) NOT NULL,
     last_qualification  VARCHAR(50),
     qualified_from      VARCHAR(255),
     passing_year        DATE,
@@ -59,7 +59,7 @@ ALTER TABLE departments ADD COLUMN hod_lecturer_id VARCHAR(15)
 REFERENCES lecturers(lecturer_id);
 
 CREATE TABLE student_leave(
-    department          varchar(5),
+    department          varchar(5) NOT NULL,
     usn                 varchar(15),
     date                date,
     assigned            boolean DEFAULT false,
@@ -69,7 +69,7 @@ CREATE TABLE student_leave(
 );
 
 CREATE TABLE lecturer_leave(
-    department          varchar(5),
+    department          varchar(5) NOT NULL,
     lecturer_id         varchar(15),
     date                date,
     assigned            boolean DEFAULT false,
@@ -93,10 +93,10 @@ CREATE TABLE lecturer_attendance(
 
 CREATE TABLE subjects(
     subject_code        VARCHAR(10),
-    subject_name        VARCHAR(50),
-    taught_by           VARCHAR(15),
-    department          VARCHAR(5),
-    semester            NUMERIC(1,0),
+    subject_name        VARCHAR(50) NOT NULL,
+    taught_by           VARCHAR(15) NOT NULL,
+    department          VARCHAR(5) NOT NULL,
+    semester            NUMERIC(1,0) NOT NULL,
     PRIMARY KEY (subject_code),
     FOREIGN KEY (taught_by) REFERENCES lecturers(lecturer_id),
     FOREIGN KEY (department) REFERENCES departments(short_code)
