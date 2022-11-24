@@ -9,6 +9,7 @@ const {
     addSubjectMarksPerSubjectForExternal,
     getSubjectMarksForStudentById,
     getSubjectMarksForAllStudents,
+    getSubjectsTaughtByLecturerHavingId,
 } = require("../controller/subjects")
 const { authSubjectLecturer } = require("../middleware/authenticateUser")
 
@@ -26,6 +27,8 @@ router.post("/:subject_code/external",authSubjectLecturer, addSubjectMarksPerSub
 
 router.get("/:subject_code/:id", getSubjectMarksForStudentById)
 router.get("/:subject_code/all",authSubjectLecturer, getSubjectMarksForAllStudents)
+
+router.get("/lecturer/:id", authSubjectLecturer, getSubjectsTaughtByLecturerHavingId)
 
 module.exports = router
 
