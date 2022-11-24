@@ -15,7 +15,7 @@ const getStudentById = async (req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM students WHERE usn = $1", [req.params.id])
         if (queryRes.rows.length > 0)
-            res.status(200).send({ ...queryRes.rows })
+            res.status(200).send({ ...queryRes.rows[0] })
         else
             res.status(400).send({
                 "message": "Cannot find student with id " + req.params.id
