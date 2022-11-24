@@ -23,7 +23,20 @@ const addDepartment = async (req, res) => {
     }
 }
 
+const getAllLecturersByDepartment = async (req, res) => {
+    try {
+        const queryRes = await db.query(`
+            SELECT * FROM lecturers WHERE department = $1`,
+            [req.query.departmentId])
+        res.status(200).send({ ...queryRes.rows })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
 module.exports = {
     getAllDepartments,
     addDepartment,
+    getAllLecturersByDepartment,
 }
