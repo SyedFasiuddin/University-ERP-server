@@ -42,8 +42,17 @@ const authSubjectLecturer = async (req, res, next) => {
         return
     }
 
-    const queryRes = db.query(`SELECT taught_by FROM subjects
-        WHERE subject_code = $1`, [req.params.subject_code])
+    let queryRes
+    try {
+        queryRes = await db.query(`
+            SELECT taught_by
+              FROM subjects
+             WHERE subject_code = $1`, [req.params.subject_code])
+    } catch (e) {
+        console.log(e)
+        res.status(400).end()
+        return
+    }
 
     if (id == queryRes.rows[0].taught_by) next()
     else {
