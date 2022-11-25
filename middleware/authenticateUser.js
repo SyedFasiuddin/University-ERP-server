@@ -52,8 +52,45 @@ const authSubjectLecturer = async (req, res, next) => {
     }
 }
 
+const authHOD = async (req, res, next) => {
+    const authHeader = req.headers.authorization
+    if (!authHeader) {
+        res.status(403).end()
+        return
+    }
+
+    let id
+    const token = authHeader.split(" ")[1]
+    try {
+        id = jwt.verify(token, process.env.JWT_SECRET)
+    } catch (e) {
+        console.log(e)
+        res.status(400).end()
+        return
+    }
+
+    let queryRes
+    try {
+        queryRes = await db.query(`
+        SELECT hod_lecturer_id
+          FROM departments
+         WHERE short_code = $1 `, [req.params.id])
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+        return
+    }
+
+    if (id == queryRes.rows[0].hod_lecturer_id) next()
+    else {
+        res.status(403).end()
+        return
+    }
+}
+
 module.exports = {
     authenticateUser,
     authSubjectLecturer,
+    authHOD,
 }
 
