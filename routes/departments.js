@@ -2,8 +2,11 @@ const { Router } = require("express")
 const {
     getAllDepartments,
     addDepartment,
-    getAllLecturersByDepartment
+    getAllLecturersByDepartment,
+    getAllLeaveForDepartment,
+    assignLeaveForDeaprtmentStudentsAndLecturers
 } = require("../controller/departments")
+const { authHOD } = require("../middleware/authenticateUser")
 
 const router = new Router()
 
@@ -11,6 +14,9 @@ router.get("/", getAllDepartments)
 router.post("/", addDepartment) // is this required?
 
 router.get("/lecturers", getAllLecturersByDepartment)
+
+router.get("/:id/leave", authHOD, getAllLeaveForDepartment)
+router.post("/:id/leave", authHOD, assignLeaveForDeaprtmentStudentsAndLecturers)
 
 module.exports = router
 

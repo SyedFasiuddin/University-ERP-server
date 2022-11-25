@@ -38,8 +38,45 @@ const getAllLecturersByDepartment = async (req, res) => {
     }
 }
 
+const getAllLeaveForDepartment = async (req, res) => {
+    try {
+        const studentLeave = await db.query(`
+            SELECT usn AS id, date
+              FROM student_leave
+             WHERE assigned = 'f'`)
+
+        const lecturerLeave = await db.query(`
+            SELECT lecturer_id AS id, date
+              FROM lecturer_leave
+             WHERE assigned = 'f'`)
+
+        res.status(200).send({
+            "students": { ...studentLeave.rows },
+            "lecturers": { ...lecturerLeave.rows }
+        })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
+const assignLeaveForDeaprtmentStudentsAndLecturers = async (req, res) => {
+    try {
+        for (let x of req.body.lecturers)
+            await db.query(`
+      INSERT INTO lecturer_attendance
+           VALUES ($1, $2)`, [x.id, new Date(x.date).toLocaleDateString()])
+        res.status(200).send({ "message": "done" })
+    } catch (e) {
+        console.log(e)
+        res.status(500).end()
+    }
+}
+
 module.exports = {
     getAllDepartments,
     addDepartment,
     getAllLecturersByDepartment,
+    getAllLeaveForDepartment,
+    assignLeaveForDeaprtmentStudentsAndLecturers,
 }
