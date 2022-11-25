@@ -101,7 +101,10 @@ const addStudent = async (req, res) => {
 
 const getStudentLeaveById = async (req, res) => {
     try {
-        const queryRes = await db.query("SELECT * FROM student_leave WHERE usn = $1", [req.params.id])
+        const queryRes = await db.query(`
+            SELECT usn AS id, date, assigned
+              FROM student_leave
+             WHERE usn = $1`, [req.params.id])
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
