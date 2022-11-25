@@ -8,9 +8,10 @@ const authenticateUser = async (req, res, next) => {
         return
     }
 
+    let id
     const token = authHeader.split(" ")[1]
     try {
-        const id = jwt.verify(token, process.env.JWT_SECRET)
+        id = jwt.verify(token, process.env.JWT_SECRET)
     } catch (e) {
         console.log(e)
         res.status(400).end()
@@ -31,9 +32,10 @@ const authSubjectLecturer = async (req, res, next) => {
         return
     }
 
+    let id
     const token = authHeader.split(" ")[1]
     try {
-        const id = jwt.verify(token, process.env.JWT_SECRET)
+        id = jwt.verify(token, process.env.JWT_SECRET)
     } catch (e) {
         console.log(e)
         res.status(400).end()
