@@ -19,8 +19,8 @@ router.post("/", addLecturer)
 router.get("/:id", authenticateUser, getLecturerById)
 router.delete("/:id", deleteLecturerById)
 
-router.get("/:id/leave", getLecturerLeaveById)
-router.post("/:id/leave", addLecturerLeaveById)
+router.get("/:id/leave", authenticateUser, getLecturerLeaveById)
+router.post("/:id/leave", authenticateUser, addLecturerLeaveById)
 
 router.get("/:id/attendance",authenticateUser, getLecturerAttendanceById)
 router.post("/:id/attendance", addLecturerAttendanceById)

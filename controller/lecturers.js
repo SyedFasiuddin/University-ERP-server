@@ -106,13 +106,23 @@ const getLecturerLeaveById = async (req, res) => {
 }
 
 const addLecturerLeaveById = async (req, res) => {
+    // expected format: "MM/DD/YYYY"
+    const date = req.body.date
+    if (new Date() > new Date(date)) {
+        res.status(400)
+            .send({ "message": "Cannot request leave for previous dates" })
+        return
+    }
+
     try {
-        const departmentId = await db.query("SELECT department FROM lecturers WHERE lecturer_id = $1",
+        const departmentId = await db.query(
+            "SELECT department FROM lecturers WHERE lecturer_id = $1",
             [req.params.id])
-        const queryRes = await db.query(`INSERT INTO lecturer_leave(department, lecturer_id, date)
-            VALUES($1, $2, $3) RETURNING *`,
-            [departmentId.rows[0].department, req.params.id, req.body.date])
-        res.status(200).send({ ...queryRes.rows })
+        await db.query(`
+            INSERT INTO lecturer_leave(department, lecturer_id, date)
+                 VALUES ($1, $2, $3)`,
+            [departmentId.rows[0].department, req.params.id, date])
+        res.status(200).send({ "message": "done" })
     } catch (e) {
         console.error(e)
         res.status(500).end()

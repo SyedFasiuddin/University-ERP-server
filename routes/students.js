@@ -23,8 +23,8 @@ router.get("/:id", authenticateUser, getStudentById)
 router.delete("/:id", deleteStudentById)
 // does university ever require to delete a student
 
-router.get("/:id/leave", getStudentLeaveById)
-router.post("/:id/leave", addStudentLeaveById)
+router.get("/:id/leave", authenticateUser, getStudentLeaveById)
+router.post("/:id/leave", authenticateUser, addStudentLeaveById)
 
 router.get("/:id/attendance",authenticateUser, getStudentAttendanceById)
 router.post("/:id/attendance",authSubjectLecturer, addStudentAttendanceById)
