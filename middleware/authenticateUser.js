@@ -9,7 +9,13 @@ const authenticateUser = async (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1]
-    const id = jwt.verify(token, process.env.JWT_SECRET)
+    try {
+        const id = jwt.verify(token, process.env.JWT_SECRET)
+    } catch (e) {
+        console.log(e)
+        res.status(400).end()
+        return
+    }
 
     if (id == req.params.id) next()
     else {
@@ -26,7 +32,13 @@ const authSubjectLecturer = async (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1]
-    const id = jwt.verify(token, process.env.JWT_SECRET)
+    try {
+        const id = jwt.verify(token, process.env.JWT_SECRET)
+    } catch (e) {
+        console.log(e)
+        res.status(400).end()
+        return
+    }
 
     const queryRes = db.query(`SELECT taught_by FROM subjects
         WHERE subject_code = $1`, [req.params.subject_code])
