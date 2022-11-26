@@ -1,0 +1,150 @@
+[
+  {
+    "full_name": "Computer Science & Engineering",
+    "short_code": "BECSE"
+  },
+  {
+    "full_name": "Mechanical Engineering",
+    "short_code": "BEME"
+  },
+  {
+    "full_name": "Civil Engineering",
+    "short_code": "BECV"
+  },
+  {
+    "full_name": "Electronics & Comm. Engineering",
+    "short_code": "BEEE"
+  },
+  {
+    "full_name": "Aeronautical Engineering",
+    "short_code": "BEAE"
+  },
+  {
+    "full_name": "Computer Science & Engineering",
+    "short_code": "MECSE"
+  },
+  {
+    "full_name": "Structural Engineering",
+    "short_code": "MESE"
+  },
+  {
+    "full_name": "Geo Informatics",
+    "short_code": "MEGI"
+  },
+  {
+    "full_name": "Civil Engineering",
+    "short_code": "PDCV"
+  },
+  {
+    "full_name": "Computer Science & Engineering",
+    "short_code": "PDCSE"
+  },
+  {
+    "full_name": "Mechanical Engineering",
+    "short_code": "PDME"
+  },
+  {
+    "full_name": "Applied Mathematics",
+    "short_code": "PDAM"
+  },
+  {
+    "full_name": "Applied Physics",
+    "short_code": "PDAP"
+  },
+  {
+    "full_name": "MBBS",
+    "short_code": "MBBS"
+  },
+  {
+    "full_name": "M.D. Anatomy",
+    "short_code": "MDA"
+  },
+  {
+    "full_name": "M.D. Physiology",
+    "short_code": "MDPS"
+  },
+  {
+    "full_name": "M.D. Bio Chemistry",
+    "short_code": "MDBC"
+  },
+  {
+    "full_name": "M.D. Pharmacology",
+    "short_code": "MDPC"
+  },
+  {
+    "full_name": "M.D. Pathology",
+    "short_code": "MDPO"
+  },
+  {
+    "full_name": "M.D. Microbiology",
+    "short_code": "MDMB"
+  },
+  {
+    "full_name": "M.D. Community Medicine",
+    "short_code": "MDCM"
+  },
+  {
+    "full_name": "M.D. Ophthalmology",
+    "short_code": "MDOM"
+  },
+  {
+    "full_name": "M.Sc. Medical Biochemistry",
+    "short_code": "MSBC"
+  },
+  {
+    "full_name": "M.Sc. Medical Microbiology",
+    "short_code": "MSMM"
+  },
+  {
+    "full_name": "B.Ed.",
+    "short_code": "BD"
+  },
+  {
+    "full_name": "B.Com.",
+    "short_code": "BC"
+  },
+  {
+    "full_name": "LLB",
+    "short_code": "LLB"
+  },
+  {
+    "full_name": "B.A. LLB",
+    "short_code": "BLLB"
+  },
+  {
+    "full_name": "B.A.",
+    "short_code": "BA"
+  },
+  {
+    "full_name": "M.A. in Mass Communication & Journalism",
+    "short_code": "MAMCJ"
+  },
+  {
+    "full_name": "M.A. in Political Science",
+    "short_code": "MAPS"
+  },
+  {
+    "full_name": "M.A. in Public Administration",
+    "short_code": "MAPA"
+  },
+  {
+    "full_name": "M.A. in Economics",
+    "short_code": "MAE"
+  },
+  {
+    "full_name": "B.Sc.",
+    "short_code": "BS"
+  },
+  {
+    "full_name": "M.Sc. in Zoologu",
+    "short_code": "MSZ"
+  },
+  {
+    "full_name": "M.Sc. in Biotechnology",
+    "short_code": "MSBT"
+  },
+  {
+    "full_name": "M.Sc. in Mathematics",
+    "short_code": "MSM"
+  }
+]

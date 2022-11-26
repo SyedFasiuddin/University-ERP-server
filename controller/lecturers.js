@@ -1,4 +1,5 @@
 const db = require("../db")
+const bcrypt = require("bcrypt")
 
 const getAllLecturers = async (_req, res) => {
     try {
@@ -13,7 +14,7 @@ const getAllLecturers = async (_req, res) => {
 const getLecturerById = async (req, res) => {
     try {
         const queryRes = await db.query("SELECT * FROM lecturers WHERE lecturer_id = $1", [req.params.id])
-        if (queryRes.rows.length > 0 )
+        if (queryRes.rows.length > 0)
             res.status(200).send({ ...queryRes.rows })
         else
             res.status(400).send({
@@ -36,6 +37,8 @@ const deleteLecturerById = async (req, res) => {
 }
 
 const addLecturer = async (req, res) => {
+    const hashedPassword = await bcrypt.hash(req.body.lecturer_id, 10)
+
     const query = {
         text: `INSERT INTO lecturers (
                     lecturer_id,
@@ -87,8 +90,10 @@ const addLecturer = async (req, res) => {
     }
 
     try {
-        const queryRes = await db.query(query)
-        res.status(200).send({ ...queryRes.rows })
+        await db.query(query)
+        await db.query("INSERT INTO passwords (id, password) VALUES ( $1, $2 )",
+            [req.body.lecturer_id, hashedPassword])
+        res.status(200).send({ "message": "done" })
     } catch (e) {
         console.error(e.stack)
         res.status(500).end()

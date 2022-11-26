@@ -12,12 +12,14 @@ const getAllSubjects = async (_req, res) => {
 
 const addSubject = async (req, res) => {
     try {
-        const queryRes = await db.query(`INSERT INTO subjects
-        (subject_code, subject_name, taught_by, department)
-        VALUES ($1, $2, $3, $4) RETURNING *`,
-            [req.params.subject_code, req.params.subject_name,
-            req.params.taught_by, req.params.department])
-        res.status(200).send({ ...queryRes.rows })
+        await db.query(`
+            INSERT INTO subjects(
+                        subject_code, subject_name, taught_by, department,
+                        semester)
+                 VALUES ($1, $2, $3, $4, $5)`,
+            [req.body.subject_code, req.body.subject_name,
+            req.body.taught_by, req.body.department, req.body.semester])
+        res.status(200).send({ "message": "done" })
     } catch (e) {
         console.log(e)
         res.status(500).end()

@@ -1,0 +1,261 @@
+[
+  {
+    "subject_code": "19KBMAT11",
+    "subject_name": "Calculus & Linear Algebra",
+    "taught_by": "A001",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBMAT21",
+    "subject_name": "Advanced Calculus and Laplace Transform",
+    "taught_by": "A002",
+    "department": "BECSE",
+    "semester": 2
+  },
+  {
+    "subject_code": "19KBPHY12",
+    "subject_name": "Engineering Physics",
+    "taught_by": "A003",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBCHE12",
+    "subject_name": "Engineering Chemistry",
+    "taught_by": "A004",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBBCV13",
+    "subject_name": "Basic Civil Engineering",
+    "taught_by": "A005",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBPPS13",
+    "subject_name": "C Programming for Problem Solving",
+    "taught_by": "A006",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBBME14",
+    "subject_name": "Basic Mechanical In to",
+    "taught_by": "A007",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBELN15",
+    "subject_name": "Basic Electronics",
+    "taught_by": "A008",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBELE15",
+    "subject_name": "Basic Electrical Engineering",
+    "taught_by": "A009",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBTCE18",
+    "subject_name": "Technical and Communication English",
+    "taught_by": "A010",
+    "department": "BECSE",
+    "semester": 1
+  },
+  {
+    "subject_code": "19KBMAT31",
+    "subject_name": "Fourier Series and Transforms, Numerical Methods",
+    "taught_by": "A011",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS32",
+    "subject_name": "Analog and Digital Electronics",
+    "taught_by": "A001",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS33",
+    "subject_name": "Data Structures and Applications",
+    "taught_by": "A013",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS34",
+    "subject_name": "Computer Organization",
+    "taught_by": "A014",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS35",
+    "subject_name": "Object Oriented Programming with C++",
+    "taught_by": "A015",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS36",
+    "subject_name": "Discrete Mathematical Structures",
+    "taught_by": "A016",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBCS39",
+    "subject_name": "Constitution of India, Ethics and Cyber Law",
+    "taught_by": "A017",
+    "department": "BECSE",
+    "semester": 3
+  },
+  {
+    "subject_code": "19KBMAT41",
+    "subject_name": "Numerical ,Probability Theory, Complex Analysis",
+    "taught_by": "A018",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBCS42",
+    "subject_name": "Design and Analysis of Algorithm",
+    "taught_by": "A019",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBCS43",
+    "subject_name": "Formal Languages and Automata Theory",
+    "taught_by": "A020",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBCS44",
+    "subject_name": "Unix Shell Programming",
+    "taught_by": "A021",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBCS45",
+    "subject_name": "Software Engineering",
+    "taught_by": "A022",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBCS46",
+    "subject_name": "Microprocessors and Microcontrollers",
+    "taught_by": "A023",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBKA49",
+    "subject_name": "Aadalitha/Vyavaharika kannada",
+    "taught_by": "A024",
+    "department": "BECSE",
+    "semester": 4
+  },
+  {
+    "subject_code": "19KBAL51",
+    "subject_name": "Management and Enterpreneurship for IT Industry",
+    "taught_by": "A025",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS52",
+    "subject_name": "Computer Networks",
+    "taught_by": "A007",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS53",
+    "subject_name": "Database Management System",
+    "taught_by": "A011",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS54",
+    "subject_name": "Operating System",
+    "taught_by": "A016",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS55",
+    "subject_name": "Java and J2EE",
+    "taught_by": "A018",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS56",
+    "subject_name": "Introduction to Software Testing",
+    "taught_by": "A005",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBWE59",
+    "subject_name": "Work Study and Erogonomics",
+    "taught_by": "A006",
+    "department": "BECSE",
+    "semester": 5
+  },
+  {
+    "subject_code": "19KBCS61",
+    "subject_name": "Python Application Programming",
+    "taught_by": "A020",
+    "department": "BECSE",
+    "semester": 6
+  },
+  {
+    "subject_code": "19KBCS62",
+    "subject_name": "Computer Graphics and Visualization",
+    "taught_by": "A023",
+    "department": "BECSE",
+    "semester": 6
+  },
+  {
+    "subject_code": "19KBCS63",
+    "subject_name": "System Software and Compiler Design",
+    "taught_by": "A004",
+    "department": "BECSE",
+    "semester": 6
+  },
+  {
+    "subject_code": "19KBCS64",
+    "subject_name": "Cloud Computing",
+    "taught_by": "A015",
+    "department": "BECSE",
+    "semester": 6
+  },
+  {
+    "subject_code": "19KBCS65",
+    "subject_name": "Operations Research",
+    "taught_by": "A009",
+    "department": "BECSE",
+    "semester": 6
+  },
+  {
+    "subject_code": "19KBCS66",
+    "subject_name": "Multimedia Communication",
+    "taught_by": "A011",
+    "department": "BECSE",
+    "semester": 6
+  }
+]

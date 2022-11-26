@@ -37,7 +37,7 @@ const deleteStudentById = async (req, res) => {
 }
 
 const addStudent = async (req, res) => {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    const hashedPassword = await bcrypt.hash(req.body.usn, 10)
 
     const query = {
         text: `INSERT INTO students (
@@ -89,11 +89,12 @@ const addStudent = async (req, res) => {
     }
 
     try {
-        // await db.query(query)
+        await db.query(query)
         await db.query("INSERT INTO passwords (id, password) VALUES ( $1, $2 )",
-            [req.body.id, hashedPassword])
+            [req.body.usn, hashedPassword])
         res.status(200).send({ "message": "done" })
     } catch (e) {
+        console.log(query)
         console.error(e)
         res.status(500).send({ "error": e.detail }) // 23505 error no.
     }
