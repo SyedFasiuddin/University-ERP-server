@@ -62,10 +62,15 @@ const getAllLeaveForDepartment = async (req, res) => {
 
 const assignLeaveForDeaprtmentStudentsAndLecturers = async (req, res) => {
     try {
-        for (let x of req.body.lecturers)
+        for (let x of req.body.lecturers) {
             await db.query(`
       INSERT INTO lecturer_attendance
            VALUES ($1, $2)`, [x.id, new Date(x.date).toLocaleDateString()])
+            await db.query(`
+           UPDATE lecturer_leave
+              SET assigned = 't'
+            WHERE lecturer_id = $1`, [x.id])
+        }
         res.status(200).send({ "message": "done" })
     } catch (e) {
         console.log(e)
