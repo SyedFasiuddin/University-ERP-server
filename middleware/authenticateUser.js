@@ -97,9 +97,40 @@ const authHOD = async (req, res, next) => {
     }
 }
 
+const authAdmin = async (req, res, next) => {
+    // const authHeader = req.headers.authorization
+    // if (!authHeader) {
+    //     res.status(403).end()
+    //     return
+    // }
+    //
+    // let id
+    // const token = authHeader.split(" ")[1]
+    // try {
+    //     id = jwt.verify(token, process.env.JWT_SECRET)
+    // } catch (e) {
+    //     console.log(e)
+    //     res.status(400).end()
+    //     return
+    // }
+    //
+    // let isAdmin = id == process.env.ADMIN_PASS
+    // if (isAdmin) next()
+    // else {
+    //     res.status(403).end()
+    //     return
+    // }
+    if (req.body.password == process.env.ADMIN_PASS) next()
+    else {
+        res.status(403).end()
+        return
+    }
+}
+
 module.exports = {
     authenticateUser,
     authSubjectLecturer,
     authHOD,
+    authAdmin,
 }
 
