@@ -11,12 +11,12 @@ const {
     getSubjectMarksForAllStudents,
     getSubjectsTaughtByLecturerHavingId,
 } = require("../controller/subjects")
-const { authSubjectLecturer } = require("../middleware/authenticateUser")
+const { authSubjectLecturer, authAdmin } = require("../middleware/authenticateUser")
 
 const router = new Router()
 
 router.get("/", getAllSubjects)
-router.post("/", addSubject) // is this really required?
+router.post("/", authAdmin, addSubject)
 
 router.get("/:department", getSubjectsByDepartment)
 

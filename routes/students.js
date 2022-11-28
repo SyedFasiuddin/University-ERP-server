@@ -11,16 +11,16 @@ const {
 } = require("../controller/students")
 const { Router } = require("express")
 const {
-    authenticateUser, authSubjectLecturer
+    authenticateUser, authSubjectLecturer, authAdmin
 } = require("../middleware/authenticateUser")
 
 const router = new Router()
 
 router.get("/", getAllStudents)
-router.post("/", addStudent)
+router.post("/", authAdmin, addStudent)
 
 router.get("/:id", authenticateUser, getStudentById)
-router.delete("/:id", deleteStudentById)
+router.delete("/:id", authAdmin, deleteStudentById)
 // does university ever require to delete a student
 
 router.get("/:id/leave", authenticateUser, getStudentLeaveById)

@@ -9,15 +9,15 @@ const {
     addLecturerAttendanceById
 } = require("../controller/lecturers")
 const { Router } = require("express")
-const { authenticateUser } = require("../middleware/authenticateUser")
+const { authenticateUser, authAdmin } = require("../middleware/authenticateUser")
 
 const router = new Router()
 
 router.get("/", getAllLecturers)
-router.post("/", addLecturer)
+router.post("/", authAdmin, addLecturer)
 
 router.get("/:id", authenticateUser, getLecturerById)
-router.delete("/:id", deleteLecturerById)
+router.delete("/:id", authAdmin, deleteLecturerById)
 
 router.get("/:id/leave", authenticateUser, getLecturerLeaveById)
 router.post("/:id/leave", authenticateUser, addLecturerLeaveById)

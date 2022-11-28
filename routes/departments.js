@@ -6,12 +6,12 @@ const {
     getAllLeaveForDepartment,
     assignLeaveForDeaprtmentStudentsAndLecturers
 } = require("../controller/departments")
-const { authHOD } = require("../middleware/authenticateUser")
+const { authHOD, authAdmin } = require("../middleware/authenticateUser")
 
 const router = new Router()
 
 router.get("/", getAllDepartments)
-router.post("/", addDepartment) // is this required?
+router.post("/", authAdmin, addDepartment)
 
 router.get("/lecturers", getAllLecturersByDepartment)
 
