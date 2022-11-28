@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt")
 
 const getAllStudents = async (_req, res) => {
     try {
-        const queryRes = await db.query("SELECT * FROM students")
+        const queryRes = await db.query(`
+            SELECT name, usn, fathers_name, department
+              FROM students`)
         res.status(200).send({ ...queryRes.rows })
     } catch (e) {
         console.error(e.stack)
@@ -13,7 +15,10 @@ const getAllStudents = async (_req, res) => {
 
 const getStudentById = async (req, res) => {
     try {
-        const queryRes = await db.query("SELECT * FROM students WHERE usn = $1", [req.params.id])
+        const queryRes = await db.query(`
+            SELECT *
+              FROM students
+             WHERE usn = $1`, [req.params.id])
         if (queryRes.rows.length > 0)
             res.status(200).send({ ...queryRes.rows[0] })
         else
@@ -28,8 +33,8 @@ const getStudentById = async (req, res) => {
 
 const deleteStudentById = async (req, res) => {
     try {
-        const queryRes = await db.query("DELETE FROM students WHERE usn = $1", [req.params.id])
-        res.status(200).send({ ...queryRes.rows })
+        await db.query("DELETE FROM students WHERE usn = $1", [req.params.id])
+        res.status(200).send({ "message": "done" })
     } catch (e) {
         console.error(e.stack)
         res.status(500).end()
