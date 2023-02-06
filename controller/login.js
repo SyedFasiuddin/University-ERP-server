@@ -61,7 +61,7 @@ const login = async (req, res) => {
         res.status(400).send({ "message": "wrong password" })
     } catch (e) {
         console.log(e)
-        res.status(500).end()
+        res.status(500).end({ "message": "Internal server error" })
     }
 }
 

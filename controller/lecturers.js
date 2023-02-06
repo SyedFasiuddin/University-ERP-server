@@ -18,7 +18,7 @@ const getLecturerById = async (req, res) => {
         const queryRes = await db.query(
             "SELECT * FROM lecturers WHERE lecturer_id = $1", [req.params.id])
         if (queryRes.rows.length > 0)
-            res.status(200).send({ ...queryRes.rows })
+            res.status(200).send({ ...queryRes.rows[0] })
         else
             res.status(400).send({
                 "message": "Cannot find lecturer with id " + req.params.id
