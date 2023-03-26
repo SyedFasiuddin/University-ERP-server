@@ -18,6 +18,8 @@ const router = new Router()
 router.get("/", getAllSubjects)
 router.post("/", authAdmin, addSubject)
 
+router.get("/lecturer/", getSubjectsTaughtByLecturerHavingId)
+
 router.get("/:department", getSubjectsByDepartment)
 
 router.post("/:subject_code/IA1",authSubjectLecturer, addSubjectMarksPerStudentForIA1)
@@ -28,7 +30,4 @@ router.post("/:subject_code/external",authSubjectLecturer, addSubjectMarksPerSub
 router.get("/:subject_code/:id", getSubjectMarksForStudentById)
 router.get("/:subject_code/all",authSubjectLecturer, getSubjectMarksForAllStudents)
 
-router.get("/lecturer/:id", authSubjectLecturer, getSubjectsTaughtByLecturerHavingId)
-
 module.exports = router
-

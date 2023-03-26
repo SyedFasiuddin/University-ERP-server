@@ -171,7 +171,7 @@ const getSubjectsTaughtByLecturerHavingId = async (req, res) => {
                 SELECT s.subject_code
                   FROM subjects AS s
                  WHERE taught_by = $1
-            `, [req.params.id])
+            `, [req.body.id])
         res.status(200).send( queryRes.rows )
     } catch (e) {
         console.log(e)
